@@ -1,0 +1,8 @@
+<svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
+      <path fill="none" stroke="#ccc" stroke-width="3" stroke-dasharray="5 2"
+        d="M139.5,50.5l29,50l-29,42l29,30l-24,32l-5,20l10,26l13,16l-8,28l-15,13l-8,15l6,16l4,13" />
+
+      <path fill="none" stroke="#FCEE21" stroke-width="3" id="triangle" stroke-linecap="round"
+        d="M139.5,50.5l29,50l-29,42l29,30l-24,32l-5,20l10,26l13,16l-8,28l-15,13l-8,15l6,16l4,13" />
+
+</svg>

@@ -1,0 +1,225 @@
+@charset "utf-8";
+/*section1中的动画*/
+.caption {
+    position: absolute;
+    z-index: 999;
+    width: 30%;
+    color: #FFF;
+    top: 40%;
+    left: 5%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    -webkit-transform: translateY(40px);
+    transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+}
+
+.caption-ani {
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.caption h1 {
+    font-family: "微软雅黑";
+    font-weight: normal;
+    font-size: 80px;
+    margin-bottom: 10px;
+
+}
+
+.caption h2 {
+	font-family: "微软雅黑";
+	font-weight: normal;
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+.line {
+    width: 0;
+    height: 1px;
+    background-color: #FFF;
+    transition: all 0.5s linear 1s;
+    -webkit-transition: all 0.5s linear 1s;
+}
+
+.line-ani {
+    width: 100%;
+}
+
+/*section2-slide-1 中的动画*/
+.section-2 .slide-1 > .fp-tableCell .biaoti {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+	
+}
+
+.section-2.active .slide-1.active > .fp-tableCell .biaoti {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2  .slide-1 > .fp-tableCell .content {
+	transform: translateY(100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+	padding：20px;
+	border-radius: 2%;
+	background-color:rgba(255, 255, 255, 0.5)；
+}
+.content p{
+	font:14px;
+}
+
+.section-2.active  .slide-1.active > .fp-tableCell .content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+
+
+/*section2-slide-2 中的动画*/
+.section-2 .slide-2 > .fp-tableCell .biaoti {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+}
+
+.section-2.active .slide-2.active > .fp-tableCell .biaoti {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2  .slide-2 > .fp-tableCell .content {
+	transform: translateY(100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+	background-color: rgba(rgb(124, 104, 104), rgb(187, 192, 187), blue, 0.5);
+	border-radius: 2%;
+	padding:3px;
+}
+
+.section-2.active  .slide-2.active > .fp-tableCell .content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2 .slide-2 > .fp-tableCell .img-wrap {
+	transform: scale(0.6);
+	opacity: 0;
+	transition: all 1s linear;
+}
+
+.section-2.active .slide-2.active > .fp-tableCell .img-wrap {
+	transform: scale(1);
+	opacity: 1;
+}
+.section-2.active .slide-2.active > .fp-tableCell .img-wrap+.img-wrap {
+    transition-delay: 0.5s;
+}
+
+.section-2.active .slide-2.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1s;
+}
+
+.section-2.active .slide-2.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1.5s;
+}
+
+/*section2-slide-4 中的动画*/
+.section-2 .slide-4 > .fp-tableCell .biaoti {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+}
+
+.section-2.active .slide-4.active > .fp-tableCell .biaoti {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2  .slide-4 > .fp-tableCell .content {
+	transform: translateY(100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+	border-radius: 2%;
+	padding: 3px;
+}
+
+.section-2.active  .slide-4.active > .fp-tableCell .content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2 .slide-4 > .fp-tableCell .img-wrap {
+	transform: scale(0.6);
+	opacity: 0;
+	transition: all 1s linear;
+}
+
+.section-2.active .slide-4.active > .fp-tableCell .img-wrap {
+	transform: scale(1);
+	opacity: 1;
+}
+.section-2.active .slide-4.active > .fp-tableCell .img-wrap+.img-wrap {
+    transition-delay: 0.5s;
+}
+
+.section-2.active .slide-4.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1s;
+}
+
+.section-2.active .slide-4.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1.5s;
+}
+
+/*section2-slide-5 中的动画*/
+.section-2 .slide-5 > .fp-tableCell .biaoti {
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+}
+
+.section-2.active .slide-5.active > .fp-tableCell .biaoti {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2  .slide-5 > .fp-tableCell .content {
+	transform: translateY(100%);
+	opacity: 0;
+	transition: all 1.5s linear;
+	margin-left: 85%;
+	width: 600px;
+	border-radius: 2%;
+	padding: 5px;
+}
+
+.section-2.active  .slide-5.active > .fp-tableCell .content {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.section-2 .slide-5 > .fp-tableCell .img-wrap {
+	transform: scale(0.6);
+	opacity: 0;
+	transition: all 1s linear;
+}
+
+.section-2.active .slide-5.active > .fp-tableCell .img-wrap {
+	transform: scale(1);
+	opacity: 1;
+}
+.section-2.active .slide-5.active > .fp-tableCell .img-wrap+.img-wrap {
+    transition-delay: 0.5s;
+}
+
+.section-2.active .slide-5.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1s;
+}
+
+.section-2.active .slide-5.active > .fp-tableCell .img-wrap+.img-wrap+.img-wrap+.img-wrap {
+    transition-delay: 1.5s;
+}
