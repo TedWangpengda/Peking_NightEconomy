@@ -811,12 +811,7 @@
           display: none;
         }
 
-   #container {
-            width: 700px;
-            position: relative;
-            margin: 0 auto;
 
-        }
         #path {
             position: absolute;
             top: 0;
@@ -828,12 +823,13 @@
             stroke: #999;
             fill: #999;
         }
+        
         #mySVG {
             position: fixed;
             top: 15%;
+            left:20%;
             width: 200px;
-            height: 700px;
-
+            height: 500px;
         }  
 
     }
@@ -870,87 +866,16 @@
   <div class="text head--text">
     “点亮”夜北京
     <div class="head-summary"></div>
-    <div class="head-by head-by-main">By <span class="head-by-author">Ellen Barry</span></div>
-    <div class="head-by">Photographs by <span class="head-by-author">Dmitry Kostyukov</span> for The New York Times;
-      Video by <span class="head-by-author">Ben C. Solomon</span></div>
-    <div class="head-by"> Produced by <span class="head-by-author">Mike Bostock</span>, <span
-        class="head-by-author">Shan Carter</span> and <span class="head-by-author">Leslye Davis</span></div>
+    <div class="head-by head-by-main"> <span class="head-by-author"></span></div>
+    <div class="head-by"> <span class="head-by-author"></span> 
+       <span class="head-by-author"></span></div>
+    <div class="head-by"> <span class="head-by-author"></span> <span
+        class="head-by-author"></span>  <span class="head-by-author"></span></div>
   </div>
 </div>
 
 
-<script src="js/jquery-3.3.1.js"></script>
-<script>
-    var video = document.getElementById("covervideo");
-    var $win = $(window);
-    var winW = $win.width();
-    var winH = $win.height();
-    var winScale = winW / winH;
-    var videoScale;
 
-    function adjustVideo() {
-        console.log(winScale);
-        console.log(videoScale);
-        if (winScale < videoScale) {
-            $("#covervideo").css({
-                "width": winH * videoScale,
-                "height": winH
-            });
-        } else {
-            $("#covervideo").css({
-                "width": winW,
-                "height": winW / videoScale
-            });
-        }
-    }
-
-    window.onload = function () {
-        var w = video.videoWidth;
-        var h = video.videoHeight;
-        videoScale = w / h;
-        adjustVideo();
-        console.log(w);
-        console.log(h);
-    }
-    window.onresize = function () {
-        winW = $win.width();
-        winH = $win.height();
-        winScale = winW / winH;
-        adjustVideo();
-    }
-
-</script>
-  
-  <script>
-
-    function fbAsyncInit() {
-      FB.init({
-        appId: "9869919170",
-        status: true,
-        cookie: true,
-        xfbml: true
-      });
-
-      document.querySelector(".navigation-share-facebook").onclick = function (event) {
-        FB.ui({
-          name: "The Russia Left Behind",
-          link: "",
-          caption: "",
-          description: "A journey through a heartland on the slow road to ruin.",
-          method: "feed",
-          picture: ""
-        });
-        event.preventDefault();
-      };
-    }
-
-    document.querySelector(".navigation-share-twitter").href = ""
-      + "?text=" + encodeURIComponent("")
-      + "&url=" + encodeURIComponent("");
-
-  </script>
-  <script async="" src="./yuan js/widgets.js.下载"></script>
-  <script async="" src="./yuan js/all.js(1).下载"></script>
   <div class="main">
     <style>
       .head-section {
@@ -1051,9 +976,9 @@
     </div>
 
     <div class="article">
-        <div id="container">
+      
         <div id="path">
-          <svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
+          <svg width="450" height="600" xmlns="http://www.w3.org/2000/svg">
 
               <path id="svg_1"
                   d="m139.5,50.5l29,50l-29,42l29,30l-24,32l-5,20l10,26l13,16l-8,28l-15,13l-8,15l6,16l4,13"
@@ -1093,189 +1018,12 @@
                       fill="#000000">12:00pm-3:00pm 老张拉面</text></a>
 
           </svg>
- </div>
-
-      <script>
-
-        if (!/iPad|iPod|iPhone/.test(navigator.userAgent)) defer(function () {
-
-          var width,
-            height,
-            nativeHeight = 1000,
-            scale,
-            y0,
-            y1;
-
-          var y = d3.scale.linear()
-            .range([0, .125, .171, .267, .455, .613, .680, .955, 1]);
-
-          var resizeTimeout,
-            render = function () { };
-
-          var path = d3.geo.path()
-            .projection(d3.geo.transform({ point: function (x, y) { this.stream.point(x * scale, y * scale); } }));
-
-          var section = d3.select(".map-left");
-
-          var svg = section.append("svg");
-
-          var g = svg.append("g");
-
-          var marker = d3.selectAll([]);
-
-          var article = d3.select(".article");
-
-          d3.select(window)
-            .on("resize.map-left", resized)
-            .on("load.map-left", resized)
-            .call(resized);
-
-          function resized() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(afterresized, 10);
-          }
-
-          function afterresized() {
-            width = document.body.clientWidth / 4;
-            height = innerHeight;
-            scale = (height - 200) / nativeHeight;
-            y0 = article.node().offsetTop;
-            y1 = y0 + article.node().offsetHeight - innerHeight;
-
-            svg
-              .attr("width", width)
-              .attr("height", height);
-
-            g
-              .attr("transform", "translate(" + (width / 2 + 48) + "," + height / 2 + ")");
-
-            y
-              .domain(marker
-                .each(function (d) { d.properties.position = this.offsetTop; })
-                .data().map(function (d) { return d.properties.position; }));
-
-            render();
-          }
-
-          d3.json("http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/map-left.json", function (error, topo) {
-            var road = topojson.feature(topo, topo.objects.road),
-              roadLength = length(road.geometry.coordinates),
-              cities = topojson.feature(topo, topo.objects.cities).features;
-
-            marker = d3.selectAll(".map-marker")
-              .data(cities, function (d) { return d ? d.properties.name : this.getAttribute("data-key"); })
-              .each(function (d, i) { d.properties.position = this.offsetTop; d.properties.top = y.range()[i]; });
-
-            y.domain(cities.map(function (d) { return d.properties.position; }));
-
-            g.append("path")
-              .datum(road)
-              .attr("class", "map-road");
-
-            var feature = g.append("path")
-              .datum(road)
-              .attr("class", "map-road map-road--story");
-
-            var label = g.append("g")
-              .attr("class", "map-label map-label--road")
-              .selectAll("g")
-              .data(cities)
-              .enter().append("g")
-              .on("click", clicked);
-
-            label.append("circle")
-              .attr("r", 2.5);
-
-            label.append("text")
-              .attr("dy", ".35em")
-              .attr("x", -10)
-              .text(function (d) { return d.properties.name; });
-
-            render = function () {
-              g.selectAll("path").attr("d", path);
-              label.attr("transform", function (d) { d = d.geometry.coordinates; return "translate(" + d[0] * scale + "," + d[1] * scale + ")"; });
-              scrolled();
-            };
-
-            d3.select(window)
-              .on("scroll.map-left", scrolled)
-              .call(render);
-
-            function scrolled() {
-              var top = y(pageYOffset), maxTop = 0;
-
-              section
-                .style("top", pageYOffset > y1 ? y1 - pageYOffset + "px" : pageYOffset < y0 ? y0 - pageYOffset + "px" : null);
-
-              feature
-                .style("stroke-dasharray", top * roadLength * scale + "," + roadLength * scale);
-
-              label
-                .classed("map-label--visited", function (d) { var t = d.properties.top; if (t < top) { if (t > maxTop) maxTop = t; return true; } })
-                .classed("map-label--visiting", function (d) { return d.properties.top === maxTop; });
-            }
-
-            function clicked(d, i) {
-              d3.transition()
-                .duration(750)
-                .tween("scroll", function () {
-                  var offset = d3.interpolateNumber(pageYOffset, d.properties.position + (i ? 40 : 0));
-                  return function (t) { scrollTo(0, offset(t)); };
-                });
-            }
-          });
-
-          function length(line) {
-            var i = 0,
-              n = line.length,
-              p0,
-              p1 = line[0],
-              length = 0,
-              dx,
-              dy;
-
-            while (++i < n) {
-              p0 = p1;
-              p1 = line[i];
-              dx = p1[0] - p0[0];
-              dy = p1[1] - p0[1];
-              length += Math.sqrt(dx * dx + dy * dy);
-            }
-
-            return length;
-          }
-
-        });
+        </div>
 
 
 
 
-
-
-        <script src="js/jquery-3.3.1.js"></script>
-      <script src="js/swiper.js"></script>
-      <script>
-          $(document).ready(function () {
-            //initialize swiper when document ready
-            var mySwiper = new Swiper('.swiper-container', {
-            // Optional parameters
-            navigation: {
-            nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-      },
-      // 如果需要分页器
-                pagination: {
-            el: '.swiper-pagination',
-          clickable: true
-
-      }
-  })
-});
-      </script>
-
-
-      </script>
-      <a class="map-marker" data-key="Lyuban"></a>
+     
       <div class="section">
           <h4 class="text">6:00pm-8:00pm&nbsp;&nbsp;<strong>五道口</strong></h4>
           <h3 id="place01" class="text">柳叶刀徐州烧烤</h3>
@@ -1348,8 +1096,7 @@
             <p>夜够长，串够吃，他们难得时间充足。等着便利贴上的梦想成真，他们会再来吃一顿烤串还愿。</p>
           </div>
         </div>
-
-        <a class="map-marker" data-key="Veliky Novgorod"></a>
+       
       <div class="section">
         <h4 class="text">9:00pm-10:00pm&nbsp;&nbsp;<strong>三里屯</strong></h4>
         <h3 id="place02" class="text">三联韬奋书店</h3>
@@ -1414,8 +1161,6 @@
                   </div>
               </div>
         
-
-            <a class="map-marker" data-key="Lyuban"></a>
             <div class="section">
                 <h4 class="text">10:00pm-11:00pm&nbsp;&nbsp;<strong>五道口</strong></h4>
         <h3 id="place03" class="text">柏拉图咖啡</h3>
@@ -1445,8 +1190,7 @@
           <p>柏拉图曾说：“我想要化作夜晚，这样我才能用数千只的眼睛看着你入睡。”对于柏拉图咖啡，它已然成了一颗夜晚的星，眨着眼睛照亮每一个灵魂。</p>
         </div>
       </div>
-
-      <a class="map-marker" data-key="Valdai"></a>
+      
       <div class="section">
         <h4 class="text">11:00pm-12:00pm&nbsp;&nbsp;<strong>回龙观</strong></h4>
         <h3 id="place04" class="text">“1818街区”龙域中心</h3>
@@ -1514,9 +1258,6 @@
         </div>
       </div>
 
-
-
-      <a class="map-marker" data-key="Chudovo"></a>
       <div class="section">
         <h4 class="text">12:00pm-3:00pm</h4>
         <h3 id="place05" class="text">老张拉面</h3>
@@ -1557,7 +1298,7 @@
           </div>
         </div>
 
-        
+
         <a class="map-marker" data-key="Valdai"></a>
         <div class="section">
           <h4 class="text">Valdai</h4>
@@ -1690,109 +1431,73 @@
             <p>It was a stirring line of poetry, but it was written 99 years before the October Revolution.</p>
           </div>
         </div>
-        <a class="map-marker" data-key="Chernaya Gryaz"></a>
-        <div class="section section--last">
-          <h4 class="text">Chernaya Gryaz</h4>
-          <h3 class="text">‘Black Dirt’</h3>
-          <div class="text">
-            <div class="slideshow">
-              <!--[if lte IE 8]><img src="http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/assets/medium/chernayaGryaz_001.jpg" style="width:100%;"><![endif]-->
-              <div class="slideshow-container">
-                <div class="slideshow-images"><img class="slideshow-image"><img
-                    class="slideshow-image slideshow-image--active"
-                    src="./The Russia Left Behind_files/chernayaGryaz_001.jpg"></div>
-                <div class="slideshow-button slideshow-button--next"><svg class="slideshow-button-arrow" width="22"
-                    height="22">
-                    <path d="M3,1.008L20.742,9.045L3,17.083L6,8.917Z"></path>
-                  </svg></div>
-                <div class="slideshow-button slideshow-button--previous"><svg class="slideshow-button-arrow" width="22"
-                    height="22">
-                    <path d="M18.742,0.758L1,8.795L18.742,16.833L15.742,8.667Z"></path>
-                  </svg></div>
-                <div class="slideshow-thumbs"><img class="slideshow-thumb slideshow-thumb--active"
-                    src="./The Russia Left Behind_files/chernayaGryaz_001(1).jpg"><img class="slideshow-thumb"
-                    src="./The Russia Left Behind_files/chernayaGryaz_002.jpg"></div>
-              </div>
-              <div class="slideshow-captions">
-                <div class="slideshow-caption slideshow-caption--active" data-slug="chernayaGryaz_001">Aleksandr
-                  Chertkov
-                  repaired his vehicle near the village of Chernaya Gryaz, which is known for its prostitutes and,
-                  equally, for televised police raids on prostitution. The women are mostly shop workers recruited from
-                  provincial cities, who waver on high heels on the highway’s shoulder as 18-wheelers blow past.</div>
-                <div class="slideshow-caption" data-slug="chernayaGryaz_002">Mr. Chertkov in the cab of his truck
-                  entering
-                  Moscow.</div>
-              </div>
-            </div>
-            <p>A traveler who has reached the village of Chernaya Gryaz — the name means “Black Dirt” — can feel the
-              suck
-              of Moscow on his skin. So it was for the truck driver Aleksandr Chertkov who, squinting in the direction
-              of
-              the city, had the square-jawed, cleareyed look of a Soviet monument to the workingman. Years spent on
-              Russia’s highways have undermined his faith in just about everything.</p>
-            <p>Black Dirt is known for its prostitutes, mostly shop workers recruited from provincial cities, who waver
-              on
-              high heels on the highway’s shoulder as 18-wheelers blow past. It is known, equally, for televised police
-              raids on prostitution — footage showing uniformed officers chasing women into birch groves, then shoving
-              them out shamefaced to answer a cameraman’s questions.</p>
-            <p>Mr. Chertkov rolled his eyes at this ritual: A few days pass, and the same women are out on the road
-              again.
-              They are a sight as permanent as the row of samovars selling tea to truck drivers. You could almost forget
-              that, in Russia, prostitution is illegal. The road will kill your illusions that way.</p>
-            <p>Consider the secondary roads that exist on maps but were never actually built, leaving Mr. Chertkov’s rig
-              at a dead end in farmland or deep forest. Consider the traffic police officers in Dagestan, who, when Mr.
-              Chertkov refused to pay a 3,000-ruble bribe (about $92), twisted his arms behind his back and made him
-              breathe into a funnel they had fashioned out of paper towels. “The Breathalyzer shows that you have been
-              drinking,” he was told. “The fine is 3,000 rubles.”</p>
-            <div class="video video--aside">
-              <div class="video-container" data-slug="7_chernayagryaz" data-poster-slug="chernaya_poster">
-                <!--[if lte IE 8]><img src="http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/assets/medium/chernaya_poster.jpg" style="width:100%;"><![endif]-->
-                <video preload="none"
-                  poster="http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/assets/medium/chernaya_poster.jpg">Your
-                  browser does not support this video.
-                  <source
-                    src="http://graphics8.nytimes.com/newsgraphics/2013/10/01/russia-videos/cb21b5be17f18e4d99bd2afcd5e1a88f2fd51ac4/7_chernayagryaz-600.mp4"
-                    type="video/mp4">
-                  <source
-                    src="http://graphics8.nytimes.com/newsgraphics/2013/10/01/russia-videos/cb21b5be17f18e4d99bd2afcd5e1a88f2fd51ac4/7_chernayagryaz-600.webm"
-                    type="video/webm"></video>
-                <div class="video-play-button">
-                  <div class="video-play-label">Play Video</div><svg class="video-play-arrow" width="22" height="22">
-                    <path d="M0,0L22,11L0,22Z"></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="video-kicker">Video | 0:36</div>
-              <div class="video-caption"><strong>Aleksandr Chertkov</strong>, a truck driver, explains the city’s pull.
-              </div>
-            </div>
-            <p>Mr. Chertkov has begun to crave order, something he imagines existed under Stalin. He feels envious when
-              he
-              drives through Belarus, where the police are too afraid to ask for bribes. The Russia he sees from the cab
-              of his truck doesn’t suffer from a lack of freedom; it suffers from a lack of control.</p>
-            <a class="map-marker" data-key="Moscow"></a>
-            <p>“There is no master in the house,” he said of Russia’s leaders. “They sign decrees if necessary, but it’s
-              as if they live somewhere abroad and come here to work. They don’t give a damn.”</p>
-            <p>A few miles down the road was Moscow, bulging, spreading, enriching itself and epitomizing his complaints
-              about the direction the country is taking. “It’s like a tumor, and all around it is poverty,” he said.</p>
-            <p>But then his time came, as well. Mr. Chertkov washed the grease off his thick hands and hauled himself up
-              into the cab of his truck and pulled away.</p>
-            <p>Proximity to Moscow was hardening him, Mr. Chertkov said, as his rig merged with traffic from the
-              airport.
-              Maybe it was time to check out for a season, park his rig in his native village where people are simpler
-              and
-              more virtuous. Put his keys on the shelf and do nothing until the spring.</p>
-            <p>But these were the idle thoughts of a man moving at full speed in the direction of the Kremlin. On the
-              right he passed one of Russia’s largest shopping malls, and a high wall of housing blocks that are home to
-              some 8,000 new arrivals. After that there was nowhere to go but in.</p>
-            <div class="additional-credits">Translations by Natalia V. Osipova and Philipp Chapkovski</div>
-          </div>
+        
+  
+
+      <style>
+        .advertisement-section {
+          padding: 0;
+          background: #333;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .advertisement-content {
+          padding: 17px 0;
+          font: 500 14px/22px sans-serif;
+          color: #999;
+          text-align: center;
+        }
+
+        #advertisement-frame {
+          margin: 12px auto;
+        }
+      </style>
+
+      <div class="section advertisement-section">
+        <div class="advertisement-content">
+          
+          <div id="advertisement-frame"></div>
         </div>
       </div>
-
       
+      <style>
+        .footer-section {
+          background: #000;
+          padding: 7px 0;
+          text-align: center;
+          width: 100%;
+        }
+  
+        .footer-section a {
+          border-right: 1px solid #ccc;
+          color: #aaa;
+          font: 10px sans-serif;
+          margin-right: 7px;
+          padding-right: 7px;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+  
+        .footer-section a:last-child {
+          border-right: none;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .footer-section a:hover {
+          text-decoration: underline;
+        }
+      </style>
+      <div class="section footer-section">
+        <a href=>© 2019 </a>
+        <a href=>中国传媒大学</a>
+        <a href=>新闻传播学部</a>
+        <a href=>融合新闻工作坊</a>
+      </div>
 
-      
+
       <script src="js/jquery-3.3.1.js"></script>
     <script src="js/ScrollMagic.js"></script>
     <script src="js/debug.addIndicators.js"></script>
@@ -1863,36 +1568,9 @@
 
         });
 
+       
     </script>
 
-      <style>
-        .advertisement-section {
-          padding: 0;
-          background: #333;
-          left: 0;
-          width: 100%;
-          overflow: hidden;
-        }
-
-        .advertisement-content {
-          padding: 17px 0;
-          font: 500 14px/22px sans-serif;
-          color: #999;
-          text-align: center;
-        }
-
-        #advertisement-frame {
-          margin: 12px auto;
-        }
-      </style>
-
-      <div class="section advertisement-section">
-        <div class="advertisement-content">
-          
-          <div id="advertisement-frame"></div>
-        </div>
-      </div>
-      
       <script>
 
       function adInit(info) {
@@ -1900,7 +1578,81 @@
         }
   
       </script>
-    </div>
+    
+</div>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    var video = document.getElementById("covervideo");
+    var $win = $(window);
+    var winW = $win.width();
+    var winH = $win.height();
+    var winScale = winW / winH;
+    var videoScale;
+
+    function adjustVideo() {
+        console.log(winScale);
+        console.log(videoScale);
+        if (winScale < videoScale) {
+            $("#covervideo").css({
+                "width": winH * videoScale,
+                "height": winH
+            });
+        } else {
+            $("#covervideo").css({
+                "width": winW,
+                "height": winW / videoScale
+            });
+        }
+    }
+
+    window.onload = function () {
+        var w = video.videoWidth;
+        var h = video.videoHeight;
+        videoScale = w / h;
+        adjustVideo();
+        console.log(w);
+        console.log(h);
+    }
+    window.onresize = function () {
+        winW = $win.width();
+        winH = $win.height();
+        winScale = winW / winH;
+        adjustVideo();
+    }
+
+</script>
+  
+  <script>
+
+    function fbAsyncInit() {
+      FB.init({
+        appId: "9869919170",
+        status: true,
+        cookie: true,
+        xfbml: true
+      });
+
+      document.querySelector(".navigation-share-facebook").onclick = function (event) {
+        FB.ui({
+          name: "The Russia Left Behind",
+          link: "",
+          caption: "",
+          description: "A journey through a heartland on the slow road to ruin.",
+          method: "feed",
+          picture: ""
+        });
+        event.preventDefault();
+      };
+    }
+
+    document.querySelector(".navigation-share-twitter").href = ""
+      + "?text=" + encodeURIComponent("")
+      + "&url=" + encodeURIComponent("");
+
+  </script>
+  <script async="" src="./yuan js/widgets.js.下载"></script>
+  <script async="" src="./yuan js/all.js(1).下载"></script>
 
     <script>
   
@@ -1972,7 +1724,7 @@
             path = d.path;
 
           gTranslate.append("image")
-            .attr("xlink:href", "http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/map-overview.jpg")
+            .attr("xlink:href", ".jpg")
             .attr("x", -nativeSize / 2)
             .attr("y", -nativeSize / 2)
             .attr("width", nativeSize)
@@ -2100,7 +1852,7 @@
       });
   
     </script>
-  
+
     <script>defer(function () {
 
       var assets = "http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/assets/" + (innerWidth * (window.devicePixelRatio || 1) * .7 > 900 ? "large" : "medium") + "/";
@@ -2384,42 +2136,162 @@
       }
     
         });</script>
-    <style>
-      .footer-section {
-        background: #000;
-        padding: 7px 0;
-        text-align: center;
-        width: 100%;
-      }
 
-      .footer-section a {
-        border-right: 1px solid #ccc;
-        color: #aaa;
-        font: 10px sans-serif;
-        margin-right: 7px;
-        padding-right: 7px;
-        text-decoration: none;
-        white-space: nowrap;
-      }
+    <script>
 
-      .footer-section a:last-child {
-        border-right: none;
-        margin: 0;
-        padding: 0;
-      }
+      if (!/iPad|iPod|iPhone/.test(navigator.userAgent)) defer(function () {
 
-      .footer-section a:hover {
-        text-decoration: underline;
-      }
-    </style>
-    <div class="section footer-section">
-      <a href=>© 2019 </a>
-      <a href=>中国传媒大学</a>
-      <a href=>新闻传播学部</a>
-      <a href=>融合新闻工作坊</a>
-    </div>
+        var width,
+          height,
+          nativeHeight = 1000,
+          scale,
+          y0,
+          y1;
 
-    <script src="./The Russia Left Behind_files/lib.js.下载"></script>
+        var y = d3.scale.linear()
+          .range([0, .125, .171, .267, .455, .613, .680, .955, 1]);
+
+        var resizeTimeout,
+          render = function () { };
+
+        var path = d3.geo.path()
+          .projection(d3.geo.transform({ point: function (x, y) { this.stream.point(x * scale, y * scale); } }));
+
+        var section = d3.select(".map-left");
+
+        var svg = section.append("svg");
+
+        var g = svg.append("g");
+
+        var marker = d3.selectAll([]);
+
+        var article = d3.select(".article");
+
+        d3.select(window)
+          .on("resize.map-left", resized)
+          .on("load.map-left", resized)
+          .call(resized);
+
+        function resized() {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(afterresized, 10);
+        }
+
+        function afterresized() {
+          width = document.body.clientWidth / 4;
+          height = innerHeight;
+          scale = (height - 200) / nativeHeight;
+          y0 = article.node().offsetTop;
+          y1 = y0 + article.node().offsetHeight - innerHeight;
+
+          svg
+            .attr("width", width)
+            .attr("height", height);
+
+          g
+            .attr("transform", "translate(" + (width / 2 + 48) + "," + height / 2 + ")");
+
+          y
+            .domain(marker
+              .each(function (d) { d.properties.position = this.offsetTop; })
+              .data().map(function (d) { return d.properties.position; }));
+
+          render();
+        }
+
+        d3.json("http://graphics8.nytimes.com/newsgraphics/2013/10/13/russia/207ffeebeb08f93156b7a4be9b0c17863de3143a/map-left.json", function (error, topo) {
+          var road = topojson.feature(topo, topo.objects.road),
+            roadLength = length(road.geometry.coordinates),
+            cities = topojson.feature(topo, topo.objects.cities).features;
+
+          marker = d3.selectAll(".map-marker")
+            .data(cities, function (d) { return d ? d.properties.name : this.getAttribute("data-key"); })
+            .each(function (d, i) { d.properties.position = this.offsetTop; d.properties.top = y.range()[i]; });
+
+          y.domain(cities.map(function (d) { return d.properties.position; }));
+
+          g.append("path")
+            .datum(road)
+            .attr("class", "map-road");
+
+          var feature = g.append("path")
+            .datum(road)
+            .attr("class", "map-road map-road--story");
+
+          var label = g.append("g")
+            .attr("class", "map-label map-label--road")
+            .selectAll("g")
+            .data(cities)
+            .enter().append("g")
+            .on("click", clicked);
+
+          label.append("circle")
+            .attr("r", 2.5);
+
+          label.append("text")
+            .attr("dy", ".35em")
+            .attr("x", -10)
+            .text(function (d) { return d.properties.name; });
+
+          render = function () {
+            g.selectAll("path").attr("d", path);
+            label.attr("transform", function (d) { d = d.geometry.coordinates; return "translate(" + d[0] * scale + "," + d[1] * scale + ")"; });
+            scrolled();
+          };
+
+          d3.select(window)
+            .on("scroll.map-left", scrolled)
+            .call(render);
+
+          function scrolled() {
+            var top = y(pageYOffset), maxTop = 0;
+
+            section
+              .style("top", pageYOffset > y1 ? y1 - pageYOffset + "px" : pageYOffset < y0 ? y0 - pageYOffset + "px" : null);
+
+            feature
+              .style("stroke-dasharray", top * roadLength * scale + "," + roadLength * scale);
+
+            label
+              .classed("map-label--visited", function (d) { var t = d.properties.top; if (t < top) { if (t > maxTop) maxTop = t; return true; } })
+              .classed("map-label--visiting", function (d) { return d.properties.top === maxTop; });
+          }
+
+          function clicked(d, i) {
+            d3.transition()
+              .duration(750)
+              .tween("scroll", function () {
+                var offset = d3.interpolateNumber(pageYOffset, d.properties.position + (i ? 40 : 0));
+                return function (t) { scrollTo(0, offset(t)); };
+              });
+          }
+        });
+
+        function length(line) {
+          var i = 0,
+            n = line.length,
+            p0,
+            p1 = line[0],
+            length = 0,
+            dx,
+            dy;
+
+          while (++i < n) {
+            p0 = p1;
+            p1 = line[i];
+            dx = p1[0] - p0[0];
+            dy = p1[1] - p0[1];
+            length += Math.sqrt(dx * dx + dy * dy);
+          }
+
+          return length;
+        }
+
+      });
+    </script>
+
+
+    <script src="./The Russia Left Behind_files/lib.js.下载"></script> 
     <script>(function () {
 
       var watched = [];
@@ -2500,11 +2372,7 @@
       })();</script>
     <!--<![endif]-->
     <script async="" src="./yuan js/adxrun.html"></script>
-    <style>
-      img[width="0"] {
-        position: absolute;
-      }
-    </style>
+
     <script>
 
     _gaq = [
@@ -2513,12 +2381,10 @@
     ];
 
     </script>
-    <script async="" src="./The Russia Left Behind_files/ga.js.下载"></script>
-    <script async="" src="./The Russia Left Behind_files/trackingTags_v1.1.js.下载"></script>
+    <script async="" src="./yuan js/ga.js.下载"></script>
+    <script async="" src="./yuan js/trackingTags_v1.1.js.下载"></script>
 
-    <!-- pipeline: 207ffeebeb08f93156b7a4be9b0c17863de3143a --><iframe scrolling="no" frameborder="0"
-      allowtransparency="true" src="./The Russia Left Behind_files/widget_iframe.2e9f365dae390394eb8d923cba8c5b11.html"
-      title="Twitter settings iframe" style="display: none;"></iframe>
+
 </body>
 
 </html>
