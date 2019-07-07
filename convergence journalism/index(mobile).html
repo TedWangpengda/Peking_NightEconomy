@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <link href="css/jquery.fatNav.css" rel="stylesheet" type="text/css">
+
+    <link href="css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+
+    <title>“点亮”夜北京</title>
+    <style>
+        html,
+        body {
+            margin: 0 auto;
+            padding: 0;
+            max-width: 640px;
+            min-width: 300px;
+            height: 100%;
+            font-family: "微软雅黑", "黑体", "宋体";
+            background-color: rgb(0, 0, 0);
+        }
+
+
+        p {
+            text-align: justify;
+            margin: 10px 15px 30px;
+            color: #FFF;
+            line-height: 2;
+            letter-spacing: 1px;
+        }
+
+
+        video {
+            width: 100%;
+        }
+
+
+        .bgvideoWrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+
+        }
+
+        .bgvideo {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        .mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        #nav {
+            width: 50px;
+            height: 50px;
+            box-sizing: border-box;
+            background-color: #666;
+            background-image: url(images/vertical-nav.jpg);
+            border-radius: 50%;
+            position: fixed;
+            left: 15px;
+            top: 10px;
+        }
+
+        .fat-nav {
+            background-image: url(images/vertical-nav.jpg);
+            background-size: cover;
+            height: 100%;
+        }
+
+        .fat-nav li a {
+            font-size: 20px;
+            opacity: 0;
+            line-height: 4.5em;
+        }
+
+        #article {
+            padding: 0 10px;
+        }
+
+        .chapter {
+            width: 100%;
+            margin: 0 auto 50px auto;
+            padding: 0;
+        }
+
+        .chapter p {
+            text-indent: 2em;
+            text-align: justify;
+            color: #FFF;
+            line-height: 2;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 17px;
+            line-height: 1.75;
+            color: #bdbdbd;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 12px;
+            text-align: center left;
+            margin: 10px 30px;
+            color: #ececec;
+        }
+
+        h3 {
+            font-size: 20px;
+            text-align: left;
+            margin: 10px 30px 30px 30px;
+            color: #bdbdbd;
+        }
+
+
+        .video {
+            font: 13px/1.4em arial, helvetica, sans-serif;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .video-container {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+
+        .video-caption {
+            margin-top: 5px;
+            color: #888;
+            padding-bottom: 20px;
+        }
+
+        .video-caption strong {
+            color: #666;
+        }
+
+        .video-play-button {
+            color: white;
+            position: absolute;
+            text-transform: uppercase;
+            opacity: 0.7;
+            left: 30px;
+            bottom: 30px;
+            width: 57px;
+            height: 52px;
+            border: 1px solid #fff;
+            background: #000;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .video-play-label {
+            font-size: 13px;
+            left: 50px;
+            width: 100px;
+            position: absolute;
+            height: 100%;
+            line-height: 52px;
+            opacity: 0;
+        }
+
+        .video-play-label,
+        .video-play-button {
+            -webkit-transition: width .3s ease, opacity .3s linear;
+            -moz-transition: width .3s ease, opacity .3s linear;
+            -o-transition: width .3s ease, opacity .3s linear;
+            -ms-transition: width .3s ease, opacity .3s linear;
+            transition: width .3s ease, opacity .3s linear;
+        }
+
+        .video-play-arrow {
+            position: absolute;
+            left: 19px;
+            top: 15px;
+            fill: #fff;
+        }
+
+        .video-container:hover .video-play-button {
+            opacity: 1;
+            width: 150px;
+        }
+
+        .video-container:hover .video-play-label {
+            opacity: 1;
+        }
+
+        .video--played .video-play-button {
+            display: none;
+        }
+
+        @media screen and (min-width:800px) {
+            body {
+                width: 650px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .video {
+                margin: 10px 0;
+                width: 100%;
+                float: none;
+            }
+
+            .ios .video video {
+                width: 90vw;
+                height: 50.6vw;
+            }
+
+
+            .video .video-caption {
+                box-sizing: border-box;
+                width: 100%;
+            }
+        }
+
+
+        .video-caption {
+            padding: 0;
+        }
+
+
+        .topcover {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical_index_bg.jpg);
+            background-size: cover;
+            position: relative;
+        }
+
+        .covertitle {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            margin-top: -203.5px;
+            opacity: 0;
+            transition: all 1s;
+            transform: translateX(-100px);
+        }
+
+        .covertitle-ani {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @keyframes updown {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .updown {
+            animation: updown 1s infinite alternate;
+        }
+
+        .coverarrow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -29px;
+        }
+
+
+        .topcover {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-index/vertical_index_bg.jpg);
+            background-size: cover;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .covertitle {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            margin-top: -203.5px;
+            opacity: 0;
+            transition: all 1s;
+            transform: translateX(-100px);
+
+        }
+
+        .covertitle-ani {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .greatHallPeople {
+            position: absolute;
+            bottom: 0;
+            top: 5%;
+            right: 50px;
+            transition: all 1s;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .greatHallPeople-ani {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @keyframes updown {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+
+
+
+        #echarts {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.445);
+        }
+
+        .showmenu {
+            opacity: 1;
+            visibility: visible;
+            z-index: 7;
+        }
+
+        .menulist {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .ending {
+            font-size: 24px;
+            color: #ececec;
+            padding-bottom: 20px;
+            padding-top: 30px;
+        }
+
+        .topcover1 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-cover/BBQ.jpg);
+            background-size: cover;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .topcover2 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-cover/book.jpg);
+            background-size: cover;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .topcover3 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-cover/cafe.jpg);
+            background-size: cover;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .topcover4 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-cover/center.jpg);
+            background-size: cover;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .topcover5 {
+            width: 100%;
+            height: 100vh;
+            background-image: url(images/vertical-cover/noodle.jpg);
+            background-size: cover;
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 70%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .pic {
+            text-align: center;
+        }
+
+        .links {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin:0 auto;
+        }
+
+        .coidea {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: auto;
+            height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chapter">
+
+        <div class="topcover">
+            <img src="images/vertical-index/vertical_index_CN.png" alt="" class="covertitle" id="covertitle">
+            <img src="images/vertical-index/vertical_index_EN.png" alt="" class="greatHallPeople" id="greatHallPeople">
+        </div>
+
+
+        <div class="bgvideoWrapper">
+            <video src="video/opening-video.mp4" loop autoplay muted id="covervideo"></video>
+            <div class="mask"></div>
+        </div>
+
+
+        <div id="nav">
+            <div class="fat-nav">
+                <div class="mask">
+                    <div class="fat-nav__wrapper">
+                        <ul>
+                            <li><a href="#place01">前言</a></li>
+                            <li><a href="#place02">柳叶刀徐州烧烤</a></li>
+                            <li><a href="#place03">三联韬奋书店</a></li>
+                            <li><a href="#place04">柏拉图咖啡</a></li>
+                            <li><a href="#place05">龙域中心-西区</a></li>
+                            <li><a href="#place06">老张拉面</a></li>
+                            <li><a href="#place07">夜阑</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="chapter p">
+        <h4>深夜食堂&nbsp;通宵书店&nbsp;24小时咖啡</h4>
+        <h3 id="place01">灯火不熄</h3>
+        <div class="text">
+            <p>“夜色如水，华灯初上。一座城市从灿烂千阳的一面，转入魅惑迷离的另一面。夜生活的丰富程度，一定程度上从侧面反映城市现代化和活力繁荣的指数。”</p>
+            <p>2019年北京市政府工作报告中提出：“出台繁荣夜间经济促消费政策，鼓励重点街区及商场、超市、便利店适当延长营业时间。”</p>
+            <p>夜间经济是指从当日下午6点到次日凌晨6点所包含的经济文化活动，其业态囊括了晚间购物、餐饮、旅游、娱乐、学习等。从北京三里屯，到上海不夜城，再到成都春熙路，夜间经济正逐渐成为现代城市经济的重要组成部分。</p>
+            <p>我们走访了位于海淀、朝阳和昌平的5家夜间经营的店面，了解那里的人们眼中的夜北京，并尝试挖掘北京夜间经济的发展潜力。</p>
+          </div>
+    </div>
+
+
+    <div class="chapter p">
+        <h4>6:00pm-8:00pm&nbsp;&nbsp;<strong>五道口</strong></h4>
+        <h3 id="place02">柳叶刀徐州烧烤</h3>
+
+        <div class="topcover1"></div>
+
+
+
+        <h1>学术界的深夜食堂</h1>
+        <p>晚上六点的柳叶刀队伍已经排到了门外，等候者大多是在附近读书或工作的老师和学生。不过今天人还不算多，网上流传的照片里，有人拿着柳叶刀120号的排队单号合影留念。</p>
+        <p><strong>柳叶刀</strong>，外科常用手术刀；坐标英国的世界权威医学杂志。“柳叶刀徐州烧烤”的店名则直接道出创始人王建的第二重身份——北京协和医学院肿瘤医院的肿瘤外科医生。</p>
+        <p>在别人眼中差异巨大的跨界对于王建却不仅仅是一种突发奇想。他直言开烧烤店是“因为吃饭不放心”。一次下了手术后，他曾亲眼看见有人挖地沟油，报警之后没几天这帮人又卷土重来。后来，他又亲眼看见自己经常去烧烤的一家店面老板被捕，戴着手铐被押离现场，原因又是地沟油和假羊肉。
+        </p>
+        <p>大家都说这些是餐饮行业人心照不宣的秘密，身为医生的王建感到怀疑，“真的只有这样才能挣钱吗？咱能不能自己开一个吃饭放心的地方？”</p>
+        <div class="video-container" data-slug="" data-poster-slug="">
+            <video poster="" controls>
+                <source src="video/liuyedao.mp4"> </video></div>
+        <div class="video-caption"><strong>柳叶刀&nbsp;&nbsp;</strong>学术界的深夜食堂</div>
+        <p>想法最终于2017年在海淀区学院路落地生根。店铺的名气最先在京城的医生群体中传播开来。烧烤店营业到凌晨两点，这和他们晚上下手术的时间恰好对上，是他们一天忙碌后小聚浅酌的首选。</p>
+        <p>围坐一桌，几根肉串就能撬开医生们已经紧锁一天的话匣子：医患关系的苦恼，规培期间入不敷出的艰辛，手术成功的喜悦，病人痊愈的感激……所有的疲倦就着烤串和杯酒下肚，夜半时分就已差不多消融——这种圈内人的抱团取暖让医生和医学生们格外有归属感。
+        </p>
+        <p>每个餐馆都有的折扣促销，在柳叶刀也被医生创始人玩出了花儿。在这里，凭借自己发表的SCI论文就可以享受打折优惠，影响因子越高折扣力度越大，一肚子的“没用”的学问成了货真价实能吃的东西。自此，这家店面正式成为了京城学术圈的“网红”打卡地，“最会烧烤的科研机构”。
+        </p>
+        <p>凭借来自学术圈的稳定客源，柳叶刀的位于五道口和北大清华的两家新分店开设顺利，并且于2019年3月获得了500万元天使轮融资。</p>
+        <p>许多结伴而来的附近高校学生在门外排着队，他们坦言自己知道柳叶刀是因为这里“发论文可以打折”。
+            下午下了课，学生们也和好友相约来这里聊聊日常。柳叶刀就像是他们的一道幸运符，进店可见满墙的便利贴，
+            写着许多学子考研、毕业、发表论文的故事。</p>
+        <p>夜够长，串够吃，他们难得时间充足。等着便利贴上的梦想成真，他们会再来吃一顿烤串还愿。</p>
+        <div class="links coidea">
+            <img src="images/liuyediao/3.png">
+            <img src="images/liuyediao/4.png">
+            <img src="images/liuyediao/5.png">
+            <img src="images/liuyediao/6.png">
+        </div>
+    </div>
+
+
+    <div class="chapter p">
+        <h4>9:00pm-10:00pm&nbsp;&nbsp;<strong>三里屯</strong></h4>
+        <h3 id="place03">三联韬奋书店</h3>
+
+        <div class="topcover2"></div>
+
+        <h1>一丛不眠的文字灯火</h1>
+
+        <p>在三里屯太古里各色橱窗灯光之间，晚上九点的三联书店的橱外周显得有些暗淡。</p>
+        <p>推开书店的侧门，阿董和她的朋友直奔插画绘本专区。沿着一小截木地板滑坡走几步，门口的书架上摆着几本崭新的插画绘本。它们统统被阿董一把揽入怀中——“这是我最近在尝试的风格，准备买回去临摹。”她笑道。</p>
+        <p>她是伦敦艺术大学插画专业的预科生，今年最后一年在国内读书；也是三联书店的常客。
+            繁重的课业，1个月一本A3大小Sketchbook作品集的节奏，加之自己天生活力无限的体质，阿董对于通宵已经习以为常。心情差劲的闲暇，一通电话就能约上朋友一起去北京的夜里晃荡——“我们这代人都不太爱晚上睡觉”。
+        </p>
+        <p>三里屯的蹦迪馆，对于自认为已经度过了叛逆期的她来说算不上高级的消遣；24小时营业的海底捞曾是她的夜间据点，但是觥筹交错的喧闹、啤酒瓶的叮叮当当和火锅的油啧污染了她内心中夜晚应有的宁静。辗转到最后，阿董投入了24小时营业的三联书店的怀抱。
+        </p>
+        <p>但并非每一个居于北京的夜行者都能有机会和精力跨越大半个北京专程来到三里屯消磨一整晚的时光。事实上，三联在全北京开设的24小时分店最初有三家，分布在海淀、东城、朝阳三区。但据报道，由于海淀区“一天一平米9块钱”的地价租金对于书店而言过于昂贵，加之水电成本的考量，海淀分店只能暂停24小时营业的模式。
+        </p>
+        <p>而三里屯分店能坚持下来，精神上是靠着经营者的情怀，经济上则是靠着政府的扶持——作为支持精神文化建设的一部分，朝阳区政府只是象征性地收取了书店一些房租。</p>
+        <p>三联书店拒绝迎合读者、坚守自己高质量选书的原则性，倒是使得它成为了三里屯独树一帜的精神地标，由此带来了比总店更大的客流量。夜晚的三联，爱书喜静的人们在这里形成了一种共读的默契。逛街逛累了的游客进店看书或是随便转转，几乎见不到大张旗鼓的打卡摆拍和嘈杂喧哗。
+        </p>
+
+        <div class="video-container" data-slug="5_valdai_tourguide" data-poster-slug="valdai_poster">
+            <video controls>
+                <source src="video/sanlianshudian.mp4"> </video>
+        </div>
+
+        <div class="video-caption"><strong>三联书店</strong>&nbsp;&nbsp;在三里屯太古里各色张扬的橱窗灯光之间，晚上九点的三联书店显得格外低调。</div>
+        <p>读者阿董看中的正是这份安静，她和朋友在三联刷过夜。夜渐深，一些读书人渐渐离开，身边倒是多了一些白领，点了饮料后坐下开始在电脑键盘上敲敲打打。阅读间隙，她还瞥见流浪汉闯入书店，拎着一个脏兮兮的破袋子，衣衫褴褛。店员的目光和他相遇，但也不会驱赶。这是深夜三联的默许：“每个人都有读书的权利，哪怕他是流浪汉。
+        </p>
+        <p>她还听店员谈起，虽然大部分流浪汉都只是进来睡觉，但也真有那么几个会捧书一读。</p>
+        <p>快凌晨四点的时候，不管是在读书的还是工作的大部分人都撑不住了，趴在桌子上直接休息。这是店里顾客最稀少的时候，总共只有十人左右。但阿董几无困意——她可以通宵阅读，越是夜深,她越是沉浸。</p>
+        <p>阿董所享受的书店里午夜至凌晨的珍贵宁静，在外界一些业内人士却颇为“不值”。北京大学文化产业研究院副院长陈少峰曾经指出，24小时书店不符合产业运行的规律。他直言，夜里12点至早上8点这个时间段营业没有意义。“如果用100万元的经营成本去补贴几十个读者的需求，那就是一种浪费。”
+        </p>
+        <p>三联韬奋书店总经理郝大超没有否认这种说法：“不过，他这是完全从经济的角度考虑。一家24小时书店会对城市整体的文化提升会起到很大的作用，我们大家不能总是把经济效益看得特别重，兼顾就可以了。”</p>
+    </div>
+
+
+    <div class="chapter p">
+        <h4>10:00pm-11:00pm&nbsp;&nbsp;<strong>五道口</strong></h4>
+        <h3 id="place04">柏拉图咖啡柏拉图咖啡</h3>
+        <div class="topcover3"></div>
+
+        <h1>一杯敬情怀，一杯敬现实</h1>
+        <p>柏拉图咖啡馆位于北大清华教师公寓附近，白天，它和我们见过的大多数咖啡馆别无二致，木质的桌椅、舒缓的背景音乐、穿着白衬衫的服务生。
+            然而到了深夜万家灯火熄灭时，柏拉图却是少有的仍在营业的咖啡馆。</p>
+        <p>
+            2009年，经营三年的柏拉图咖啡决定实行24小时营业制，这不仅是由于经济上的压力，更是因为在夜晚12点咖啡馆本该打烊时，
+            不少来自清华北大的同学都不愿离开这个可以静心学习的地方。试营业的一周里，店长何长波发现，
+            夜间的营业收入超过了人力与水电的额外支出，咖啡馆的流水整体上涨了，这使他更加坚定了24小时的营业模式。
+        </p>
+        <p>在柏拉图，点一杯三十元的可续杯咖啡就能安心学习一夜。这里偶尔也会举办文化沙龙、承接学生社团活动，学习与休闲在柏拉图咖啡得到了巧妙的结合，渴望知识的灵魂与亟待放松的身心都能在这儿得到慰藉。</p>
+
+        <div class="video-container" data-slug="" data-poster-slug="">
+            <video poster="" controls>
+                <source src="video/bolatu.mp4">
+            </video> </div>
+
+        <div class="video-caption"><strong>柏拉图咖啡</strong>2003开店至今，30元一杯免费续杯，可以待24小时，因而成为附近很多学生的选择。
+        </div>
+
+        <p>何店长告诉我们，学生社团利用公众号等途径为咖啡馆做宣传，咖啡馆则给予活动承办组织一定的优惠，尤其是跨年夜和3月7日“女神节”时，
+            店里忙得不可开交。在平常的日子里，由于校内图书馆十点就会闭馆，柏拉图咖啡成了清北同学“刷夜”的不二选择。</p>
+        <p>店里的书架上留存着十年来顾客们的留言簿，其中有人抱怨学业的压力，有人描述对店内优雅氛围的喜爱，
+            有人记录在这里遇见的爱情，也有人已经毕业了，还不时过来坐坐，体验当年的气氛，记录而今的感受。</p>
+        <p>柏拉图尽力满足着老顾客对情怀的追求，同时，它也面临着现实的经济压力。一位就读于清华大学的顾客告诉我们，其实校内现在已经开放了24小时自习室，并不需要到校外寻找通宵学习的地方。除了发放优惠券、
+            联合学生社团，如何继续扩大咖啡馆在学生中的影响力，如何吸引学生之外的群体，这是何长波正在思索的问题。</p>
+    </div>
+
+
+    <div class="chapter p">
+        <h4>11:00pm-12:00pm&nbsp;&nbsp;<strong>回龙观</strong></h4>
+        <h3 id="place05">“1818街区”龙域中心</h3>
+        <div class="topcover4"></div>
+
+        <h1>夜间“不打烊”商街</h1>
+        <p>昌发展·龙域中心位于享有“亚洲最大社区”之称的回龙观地区，集智慧办公、人才公寓、商业综合体三大亮点于一身，
+            吸引了大批IT工程师、程序员、白领。近期，回龙观龙域中心西区商业街被确立为昌平24小时“深夜食堂”特色餐饮街区。</p>
+        <p>夜晚的龙域中心，依然人头攒动。烧烤店外排队等候的顾客嬉笑交谈，超市里推车购物的居民精选着新鲜食材，
+            书店内的读者以书释怀，便利店里也有加班族前来购买简餐简食……</p>
+        <p>附近的一处自助篮球场引起了我们的注意。“我晚上经常会来这儿打篮球，”就职于百度的贾铭一边与记者交谈，
+            一边扫着篮球场入口“运动家-回+体娱加速器”（国内首家专业体育加速器）的程序码，“因为我是做运营主管的，
+            所以相对于我们公司的程序员们会更有时间一些。”</p>
+        <p>相较篮球场的热血与喧嚣，不远处的“一个书店”则显得低调与静谧。虽然已近深夜，书店里仍有不少读者。
+            店员春茜告诉我们：“周末以及下午到下班这段时间客人会比较多，有一些是工作加班后来放松一下这样子。”
+            为了不影响读者，春茜又压低了声音：“我们店是早上九点开到晚上十二点。周末各时段客人差不多，工作日晚上比白天人多一点。”</p>
+
+        <div class="video-container" data-slug="5_valdai_tourguide" data-poster-slug="valdai_poster">
+            <video controls>
+                <source src="video/longyuzhongxin.mp4">
+            </video>
+        </div>
+
+        <div class="video-caption"><strong>昌发展·龙域中心</strong>位于享有“亚洲最大社区”之称的回龙观地区,近期被确立为昌平24小时“深夜食堂”特色餐饮街区。
+        </div>
+
+        <p>今年的北京市政府工作报告提出，“出台繁荣夜间经济促消费政策，鼓励重点街区及商场、超市、便利店适当延长
+            营业时间”。中国连锁经营协会2018年5月发布的《2018中国便利店发展报告》数据显示，2017年，
+            北京的城市便利店发展指数排名为全国第七位，24小时便利店所占比例达44.4％。2017年底，北京市出台了
+            《关于进一步优化连锁便利店发展环境的工作方案》，提出到2020年，连锁便利店数量达到3000家左右，
+            24小时便利店占比达50％以上。</p>
+        <p>而在回龙观地区，仅“便利蜂”品牌的连锁便利店就有十余家。“我们是24小时营业的，我是从今晚9点上到明早9点，996嘛。”
+            一位不愿透露姓名的便利蜂店员笑称，“24小时的店，每天夜里边儿基本上每小时都不断人，不过后半夜相对少一点。”</p>
+        <p>在便利蜂店内的靠窗边一侧，我们与一对正在享用晚餐的情侣交谈起来。王舒漫女士告诉记者：“我们经常来这边，
+            他下班比较晚，就直接过来，在这里吃饭。”当谈及对龙域中心夜间服务的看法时，王女士称：“我觉得附近没有什么KTV，
+            电影院有一个，超市什么的还可以吧。逛街的地方也不多，虽然那边开了一个商场，但是牌子也比较少。”</p>
+        <p>已近零点，我们准备返程时，遇到了刚从烧烤店出来的程序员崔先生一行。“我在软件园那边的百度上班，是一个月前才搬来这里的。
+            晚上十点左右才能回家，只有夜间才有空和朋友出来吃个烧烤、喝个啤酒这样。”</p>
+    </div>
+    </div>
+
+    <div class="chapter p">
+        <h4>12:00pm-3:00am</h4>
+        <h3 id="place06">老张拉面</h3>
+        <div class="topcover5"></div>
+
+        <h1>夜店一条街的深夜食堂</h1>
+        <p>
+            在网络上搜索“老张拉面”，可以看到《青年路的老张拉面，是我想象中的深夜食堂》、《青年路上的传奇拉面，凌晨才开卖》、《神秘的京城第一面，为何只在深夜12点开？》等文章以及不少主播的探店视频。
+            甚至在沈腾的人物专访里，也提到他减肥前最后一顿是半夜吃了两大碗“网红”老张拉面。</p>
+        <p>
+            大家提到的“老张拉面”，位于青年路朝阳大悦城附近，每天凌晨12点半准时开锅下面，一直营业到中午12点左右，因其味美价廉以及特殊的营业时间成为了风靡社交平台的网红。2018年，杨玉蓉在丈夫堂哥经营的青年路店帮忙时，
+            遇到了成奶仓，两人一拍即合，前者出手艺，后者出资金。就这样，老张拉面工体旗舰店于当年10月26日正式开张。</p>
+        <p>工体店与青年路店的营业模式大致相同，都属于深夜食堂，而工体店的特殊之处在于“正能量”的经营宗旨——
+            店内张贴的红底白字标语“当你遇到困难时，可以在老张拉面免费吃一碗热腾腾的面”就说明了一切。</p>
+        <p>凌晨一点，我们到达了位于朝阳区工人体育场西路6号的老张拉面工体旗舰店，透过玻璃，我们看到杨姐正在厨房里拉面，于是我们找位置坐了下来。碰杯声、吃面的“吸溜”声、聊天声、桌椅拖动的声音混杂在一起，让这个面馆和工体的热闹氛围显得并不突兀。
+            服务员给我们一人上了一碗面，男生大碗、女生小碗，配上两瓶花生奶，说是老板请的。</p>
+        <p>
+            作为北京夜生活的圣地、潮流的风向标、玩咖们的天堂，夜晚的工体随处可见打扮新潮、成群结队的俊男靓女，也有人喝醉后在路边呕吐，甚至直接躺在地上。不少蹦完迪的年轻人选择去老张拉面——工体夜店一条街的深夜食堂。手工制作的面条、由牛骨熬制的汤头，撒上卤牛肉、香菜，
+            加上丸子、豆皮、鸡蛋，简单的食材和朴素的做法舒缓着一个个被酒精刺激的胃，也为一夜的狂欢画上一个完美的句点。</p>
+        <p>杨姐告诉我们，偶尔还会有喝醉的年轻人在店里睡过去，“上次有个女孩直接在我床上睡着了，迷迷糊糊地，还喊我叫‘妈’，我就帮她洗脸，给她盖好被子”。除了蹦迪的人，周围酒吧下班或准备上班的酒保、DJ、
+            驻唱以及加班的白领也是这里的常客，一碗热气腾腾的面下肚，就准备开始一天忙碌的工作或者回家身心舒适地睡去。</p>
+        <p><strong>小碗二十二块，大碗二十五</strong>,这样的价格与“一盒纸巾都需要花费十五元”的工体大环境显得格格不入。而正是这些火爆的夜店，
+            为老张拉面提供了生意兴隆的土壤，也正是这样一碗朴实的面，让一颗颗兴奋到疲惫的心在夜色的魔力下回归平淡与真实。</p>
+
+        <div class="video-container" data-slug="2_chudovo_wedding" data-poster-slug="chudovo_001_poster">
+            <video poster="" controls>
+                <source src="video/laozhanglamian.mp4" type="video/mp4">
+                <source src="" type=""></video>
+        </div>
+
+        <div class="video-caption">“当你遇到困难时，可以在老张拉面免费吃一碗热腾腾的面”</div>
+    </div>
+
+
+    <div class="chapter p">
+        <h4>3:00am-6:00am </h4>
+        <h3 id="place07">夜阑</h3>
+        <h4></h4>
+        <div class="text">
+            <div class="pic">
+                <img src="images/ending.jpg" />
+            </div>
+            <p>时针指向凌晨三点，忙碌一整晚的老张拉面......不出意外，十几公里开外的另一家深夜食堂
+                柳叶刀烧烤店里的服务员刚刚把最后一袋厨余扔进垃圾车——他的工作结束了，他该回家了。</p>
+            <p>在其以西七公里开外的三联书店，这是一夜顾客最稀少的时候，店里人数在十人上下浮动。对于大部分人而言，
+                一夜与书籍或事工作的缠斗也接近尾声，困意终于占了上风，他们会趴在桌子上直接休息。</p>
+            <p>黎明将至未至，这是北京夜里最活跃的细胞也在渐渐沉默。然而，北京的36条夜班公交车线路司机却还没有到下班的时候：
+                共计848公里蜿蜒道路旁的不眠者还要靠着他们达到自己的目的地。 四点五十的时候末班车开出，
+                六点左右回到总站——这是夜晚和清晨交接的最后一棒。</p>
+            <p>清晨六点，北京崭新的一天即将揭幕；但另一个半球，夜间狂欢才刚刚开始。
+                在纽约，晚上六点即将来临，分布在大街小巷的大约19400家餐饮机构正在为食客准备饕餮大餐，
+                ESI Thought Lab 在2016年出版《纽约夜生活经济》（New York City's Nightlife Economy）研究报告中提及，
+                它们一夜能带来大约120亿美元直接经济产出，占总量的63%。饮食同样是另一个国际大都市悉尼夜间经济的最主要组成部分——
+                属于夜间经济的所有营业机场所中，70%都和“吃”有关。对于另一些并非以美食闻名的城市，夜间消费则别有去处——
+                伦敦经济与商业研究中心的报告显示：在2015年，夜间博物馆、图书馆和音乐厅等文化产业机构就已在伦敦提供了超过50万个工作岗位。</p>
+            <h4 class="text"></h4>
+            <h4><strong>夜间经济对于各国的重要性</strong></h4>
+
+            <div id="charts table">
+                <div id="echarts"></div>
+            </div>
+
+
+            <h4></h4>
+            <h4></h4>
+            <h4 class="ending">夜间旅游：</h4>
+            <p>一是夜景观光旅游，如挪威极光之旅、澳洲蓝色大海等；</p>
+            <p>二是夜间节事旅游，如自贡灯会、里昂灯光节、里约热内卢狂欢节等；</p>
+            <p>三是夜间文化艺术休闲游，如芬兰赫尔辛基艺术之夜，欧美各大城市文化之夜、白夜节、博物馆夜游等；</p>
+            <p>四是夜间演艺体验游，如国内印象系列、宋城千古情等；</p>
+            <p>五是街区夜游，如北京王府井、上海南京路等；</p>
+            <p>六是景区夜游，如迪士尼乐园夜间巡游等。</p>
+            <h4></h4>
+
+            <div class="pic">
+                <img src="images/light.png" width="100%" height="100%" />
+            </div>
+
+            <h4></h4>
+            <h4 class="ending">重庆：2014年6月</h4>
+            <p>关键词：夜间旅游</p>
+            <p>《发展夜市经济的意见》：市级特色型夜市街区，打造具有全国影响的夜市品牌</p>
+            <p>（1）洪崖洞</p>
+            <p>（2）两江游轮：据了解，目前两江游夜间客流占较大比重，旺季日均客流量保持在8000至9000人次，淡季2000至3000人次，国家法定节日1.5万至2万人次，可观的客流为重庆夜间旅游起到了较大助推作用。
+                为了提升游客的视觉体验和乘船体验，两江游运营方重庆市客轮有限公司采取了一系列举措。
+                如为避免游客候船时间过长，引导游客“错峰旅游”，推出了电子联网售票系统，并严格执行实名制购票登船制度；
+                为提升旅游产品品质，在常规两江游的基础上开通运行了“臻品两江游”，采用更加舒适的满江红游船，
+                并在行程中融入了两江游文创体验服务中心、国家级非遗名录项目“川江号子”实景演出，
+                将巴渝文化与夜游体验深度融合，带给游客别样体验。</p>
+            <p>
+                （3）江北九街：位于重庆市江北区观音桥商圈的九街是重庆知名的夜间旅游街区，丰富多彩的夜间休闲业态，吸引了众多市民游客，尤其是年轻游客。于九街而言，傍晚不是高峰期，晚上9点以后才是人气最旺的时段，各种各样的流行元素在这里落地生根，赋予了九街不一样的文化气息，吸引着无数年轻游客。
+                “目前，九街的日均客流量约4万人次，节假日高峰超过6万人次，其中60%以上为外地游客。
+                值得关注的是，在现有101个商户中，由法国、韩国、泰国、土耳其等国人士经营的有10余家，
+                九街也日益成为来渝外国友人的聚集地。”</p>
+            <h4></h4>
+            <h4 class="ending">上海：2019年4月</h4>
+            <p>《推动“夜间经济”发展指导意见》</p>
+            <p>其一，将建立“夜间区长”和“夜生活首席执行官”制度，由各区分管区长和具有夜间经济相关行业管理经验的人员分别担任。
+                鼓励各区公开招聘具有夜间经济相关行业管理经验的人员担任“夜生活首席执行官”，协助“夜间区长”工作。</p>
+            <p>其二，将编制夜生活集聚区发展规划，打造一批地标性夜生活集聚区。</p>
+            <p>其三，将引进培育沉浸式话剧、音乐剧、歌舞剧等夜间文化艺术项目，对深夜影院、深夜书店、音乐俱乐部、驻场秀等夜间
+                文化娱乐业态秉持包容审慎态度，并积极开发浦江夜游、博物馆夜游等多元化都市夜游项目。</p>
+            <p>其四，将做好夜市试点工作，指导夜市运营管理主体建立夜市管理规定。在夜市现制现售、垃圾处理等方面创新管理制度，
+                打造环境友好、放心安全、有工匠精神的“深夜食堂”。</p>
+            <p>其五，将试点放宽夜间外摆位管制。试点在夜间特定时段，允许有条件的酒吧街开展“外摆位”试点。</p>
+            <p>其六，将试点在夜间特定时段将部分夜宵街、酒吧街所属道路调整为分时制步行街，并在周边区域增加夜间停车位、
+                出租车候客点、夜班公交线路等。</p>
+            <p>其七，将支持指导夜生活集聚区开展夜间灯光造景，做好街景打造、装饰照明、标识指引等工作，营造良好夜间消费氛围。</p>
+            <p>其八，将支持成立本市夜间经济发展相关行业组织，促进国内外交流合作，引导行业自律发展。</p>
+            <p>其九，将加强行业研究，支持夜间经济相关智库发展，为政府决策和行业发展提供参考。</p>
+            <p>其十，将利用财政扶持资金，支持夜间经济发展。鼓励各区挥财政资金作用，支持一批促进夜间经济发展的重点项目。</p>
+            <h4></h4>
+            <h4 class="ending">天津：2018年11月6日</h4>
+            <p>天津市人民政府办公厅发布《关于加快推进夜间经济发展实施意见》，
+                要求“着力建设一批夜间经济载体，营造高品质夜间营商消费环境，大幅提升城市开放活跃度，
+                加快形成夜间经济体系”。天津市计划在2019年底前打造形成6个市级夜间经济示范街区，开发特色体验活动，培育多元化夜间消费模式，
+                形成“夜游海河”“夜赏津曲”“夜品津味”“夜购津货”等一系列品牌。</p>
+            <p>在这个拥有2000多万庞大人口、中国平均加班时间最长的大都市里，夜间是少有的休憩时光。夜间商业包罗万象，
+                每个人都想要找到适合自己的节拍。它可以是一种经营模式，可以是一种社群需求，也可以是一种文化内涵。这是点亮夜北京的初心所在。</p>
+            <p>然而，商业现实中却还有更多的因素需要考量：水费电费，人工成本，房租地价，客流营收。
+                有的店面扎根于现实，在夜北京的建设中摸索最适合自己的前行方式；有的店面立足于理想主义，依托政府补助来培植夜北京的精神沃土，
+                是可持续有待市场考验。</p>
+            <p>对于“夜间经济”这个词，消费者看法各异，有人会质疑“都上班了哪有空啊”，“可能这纯粹只是一个概念”；有人则会欣然支持：“白天上班，到了晚上就想找个地方，比如咖啡馆，看书学习或者加班（因为自己在家里就会懒得动嘛）。
+                但无论如何，无论是字面上还是行动上，一场建设夜间北京的行动正在启动：北京市政府在2019年初的政府工作报告中表示将对夜间营业的餐馆、
+                街区以及商圈给予补贴，例如对深夜餐厅给予最高10万元人民币的补贴，对特色餐饮街区最高500万元的补贴支持等。同时，北京市各区已展开行动，
+                三里屯太古里，以及有亚洲最大社区之称的回龙观、天通苑地区将建设深夜食堂特色餐饮区。北京市计划到2022年，全市有一半以上的便利店实现24小时营业，
+                每个区至少有一个深夜经济商圈。</p>
+            <p>至于夜间经济的模式在北京究竟能走多远，能否真正激发新一轮消费潜力，也许还要看<strong>时间</strong>的检验。</p>
+            <h4></h4>
+            <h4></h4>
+            <h4></h4>
+            <h4></h4>
+        </div>
+        </container>
+        <style>
+            .advertisement-section {
+                padding: 0;
+
+                left: 0;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .advertisement-content {
+                padding: 17px 0;
+                font: 500 14px/22px sans-serif;
+                color: #999;
+                text-align: center;
+            }
+
+            #advertisement-frame {
+                margin: 12px auto;
+            }
+        </style>
+
+        <div class="section advertisement-section">
+            <div class="advertisement-content">
+                记者｜尹雪飞 谢文琦 王鹏达 姜萱 申皓文
+                <div id="advertisement-frame">摄影 视频｜申皓文</div>
+                <div id="advertisement-frame">网页制作｜王鹏达 姜萱</div>
+                <div id="advertisement-frame">指导老师｜顾洁 王海波</div>
+            </div>
+        </div>
+
+        <style>
+            .footer-section {
+                background: #333;
+                padding: 7px 0;
+                text-align: center;
+                width: 100%;
+            }
+
+            .footer-section a {
+                border-right: 1px solid #ccc;
+                color: #aaa;
+                font: 10px sans-serif;
+                margin-right: 7px;
+                padding-right: 7px;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+
+            .footer-section a:last-child {
+                border-right: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .footer-section a:hover {
+                text-decoration: underline;
+            }
+        </style>
+        <div class="section footer-section">
+            <a href=>© 2019 </a>
+            <a href=>中国传媒大学</a>
+            <a href=>新闻传播学部</a>
+            <a href=>融合新闻工作坊</a>
+        </div>
+
+        <script src="js/jquery-3.3.1.js"></script>
+        <script>
+            var video = document.getElementById("covervideo");
+            var $win = $(window);
+            var winW = $win.width();
+            var winH = $win.height();
+            var winScale = winW / winH;
+            var videoScale;
+
+            function adjustVideo() {
+                console.log(winScale);
+                console.log(videoScale);
+                if (winScale < videoScale) {
+                    $("#covervideo").css({
+                        "width": winH * videoScale,
+                        "height": winH
+                    });
+                } else {
+                    $("#covervideo").css({
+                        "width": winW,
+                        "height": winW / videoScale
+                    });
+                }
+            }
+
+            window.onload = function () {
+                var w = video.videoWidth;
+                var h = video.videoHeight;
+                videoScale = w / h;
+                adjustVideo();
+                console.log(w);
+                console.log(h);
+            }
+            window.onresize = function () {
+                winW = $win.width();
+                winH = $win.height();
+                winScale = winW / winH;
+                adjustVideo();
+            }
+        </script>
+
+        <script src="js/jquery-3.3.1.js"></script>
+        <script>window.onload = function () {
+                $("#covertitle").addClass("covertitle-ani");
+                $("#greatHallPeople").addClass("greatHallPeople-ani");
+            }
+        </script>
+
+        <script src="js/echarts.js"></script>
+        <script>
+            var myChart = echarts.init(document.getElementById('echarts'));
+            var option = {
+
+
+
+                legend: {},
+                tooltip: {},
+                dataset: {
+                    source: [
+                        ['城市', '夜间经济收入（亿美元）', '夜间工作岗位（千个）'],
+                        ['伦敦', 335, 723],
+                        ['纽约', 191, 299],
+                        ['悉尼', 36.4, 35.6],
+                    ]
+                },
+                xAxis: { type: 'category' },
+                yAxis: {},
+                series: [
+                    {
+                        type: 'bar',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'inside',
+                                fontSize: '15'
+                            }
+                        }
+                    },
+                    {
+                        type: 'bar',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'inside',
+                                fontSize: '15'
+                            }
+                        }
+                    },
+
+                ]
+            }
+
+            myChart.setOption(option);
+        </script>
+
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+
+        <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="js/jquery.fatNav.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $.fatNav();
+            });
+
+        </script>
+
+
+
+
+</body>
+
+</html>
